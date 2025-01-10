@@ -39,7 +39,7 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.ict.edu.yakjigi.domain.Sub303.vo, com.ict.edu.yakjigi.domain.Mybasicboardlog.vo, com.ict.edu.yakjigi.domain.counsel.vo
+  type-aliases-package: com.ict.edu.yakjigi.domain.userdose.vo, com.ict.edu.yakjigi.domain.medi_disposal_box_info.vo, com.ict.edu.yakjigi.domain.counsel.vo
 
 # 비밀키 사용(32바이트길이)  
 # 1 시간 = 1000ms * 60 * 60 ;
