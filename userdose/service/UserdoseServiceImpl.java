@@ -38,7 +38,11 @@ public class UserdoseServiceImpl implements UserdoseService {
             UserdoseVO vo = new UserdoseVO();
             vo.setUser_idx(payloadVO.getUser_idx());
             vo.setDose_date(payloadVO.getDose_date());
-            vo.setDose_other(payloadVO.getDose_other());
+
+            // Dose_other 항목에서만 <p> 태그 제거
+            String cleanedDoseOther = payloadVO.getDose_other().replaceAll("(?i)<p>|</p>", "");
+            vo.setDose_other(cleanedDoseOther);
+
             vo.setMedi_name(medication.getMedi_name());
             vo.setDose_way(medication.getDose_way());
             vo.setDose_purpose(medication.getDose_purpose());
