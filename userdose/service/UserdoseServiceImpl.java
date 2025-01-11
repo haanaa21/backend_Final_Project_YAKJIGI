@@ -55,8 +55,7 @@ public class UserdoseServiceImpl implements UserdoseService {
         if (payloadVO.getDose_date() == null) {
             throw new IllegalArgumentException("dose_date is required and cannot be null.");
         }
-    
-        String doseDate = payloadVO.getDose_date().toString();
+
         // 기존 데이터 삭제
         userdoseMapper.deleteDose(payloadVO.getUser_idx(), payloadVO.getDose_date().toString());
 
