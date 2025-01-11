@@ -9,14 +9,14 @@
     <!-- 사용자 복용 기록 조회 -->
     <select id="getUserDoses" parameterType="string" resultType="com.ict.edu.yakjigi.domain.userdose.vo.UserdoseVO">
         SELECT * 
-        FROM ictedu_db.user_dose 
+        FROM user_dose 
         WHERE user_idx = #{userId}
     </select>
 
     <!-- 특정 날짜 및 사용자 기록 조회 -->
-    <select id="getDetailsByDateAndUser" parameterType="java.util.Map" resultType="com.ict.edu.yakjigi.domain.userdose.vo.UserdoseVO">
+    <select id="getDetailsByDateAndUser" parameterType="com.ict.edu.yakjigi.domain.userdose.vo.PayloadVO" resultType="com.ict.edu.yakjigi.domain.userdose.vo.UserdoseVO">
         SELECT * 
-        FROM ictedu_db.user_dose 
+        FROM user_dose 
         WHERE dose_date = #{date} AND user_idx = #{userId}
     </select>
 
@@ -25,5 +25,11 @@
         INSERT INTO user_dose (user_idx, dose_date, medi_name, dose_way, dose_purpose, dose_other)
         VALUES (#{user_idx}, #{dose_date}, #{medi_name}, #{dose_way}, #{dose_purpose}, #{dose_other})
     </insert>
+
+    <!-- 복용 기록 삭제 -->
+    <delete id="deleteDose" parameterType="com.ict.edu.yakjigi.domain.userdose.vo.PayloadVO">
+    DELETE FROM user_dose 
+    WHERE user_idx = #{userId} AND dose_date = #{date}
+</delete>
 
 </mapper>
