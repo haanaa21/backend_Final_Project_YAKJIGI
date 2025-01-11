@@ -28,8 +28,8 @@
 
     <!-- 복용 기록 삭제 -->
     <delete id="deleteDose" parameterType="com.ict.edu.yakjigi.domain.userdose.vo.PayloadVO">
-    DELETE FROM user_dose 
-    WHERE user_idx = #{userId} AND dose_date = #{date}
-</delete>
+        DELETE FROM user_dose 
+        WHERE user_idx = #{userId} AND dose_date = #{date}
+    </delete>
 
 </mapper>

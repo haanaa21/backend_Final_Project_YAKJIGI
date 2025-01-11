@@ -12,4 +12,3 @@ public interface UserdoseService {
     void saveMyBasicBoardLog(PayloadVO payloadVO);
     void updateDose(PayloadVO payloadVO); // 수정 기능 메서드
 }
-
