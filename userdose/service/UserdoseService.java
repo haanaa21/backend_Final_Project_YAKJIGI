@@ -10,5 +10,6 @@ public interface UserdoseService {
     List<UserdoseVO> getDetailsByDateAndUser(String date, String userId);
     void deleteDose(String userId, String date);
     void saveMyBasicBoardLog(PayloadVO payloadVO);
+    void updateDose(PayloadVO payloadVO); // 수정 기능 메서드
 }
 

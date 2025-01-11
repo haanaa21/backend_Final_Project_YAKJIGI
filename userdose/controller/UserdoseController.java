@@ -30,6 +30,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ict.edu.yakjigi.domain.userdose.service.UserdoseService;
 import com.ict.edu.yakjigi.domain.userdose.vo.PayloadVO;
 import com.ict.edu.yakjigi.domain.userdose.vo.UserdoseVO;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/api") // 기본 매핑 경로 설정
@@ -140,41 +143,36 @@ public class UserdoseController {
         }
     }
 
-    
-    // 디비 저장
-    // @PostMapping("/mybasicboardlog/save")
-    // public ResponseEntity<Void> saveMyBasicBoardLog(@RequestBody UserdoseVO requestData) {
-    //     // 요청 데이터 확인
-    //     System.out.println("저장 데이터 값: " + requestData);
-    
-    //     try {
-    //         // 서비스 호출
-    //         userdoseService.saveMyBasicBoardLog(requestData);
-    //         return ResponseEntity.ok().build();
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    //     }
-    // }
 
     // 데이터 수신 및 로깅
     @PostMapping("/receivepayload")
-public ResponseEntity<String> receivePayload(@RequestBody PayloadVO payloadVO) {
-    try {
-        System.out.println("Received Payload: " + payloadVO);
+    public ResponseEntity<String> receivePayload(@RequestBody PayloadVO payloadVO) {
+        try {
+            System.out.println("Received Payload: " + payloadVO);
 
-        payloadVO.getMedications().forEach(medication -> {
-            System.out.println("Medication: " + medication);
-        });
+            payloadVO.getMedications().forEach(medication -> {
+                System.out.println("Medication: " + medication);
+            });
 
-        userdoseService.saveMyBasicBoardLog(payloadVO);
+            userdoseService.saveMyBasicBoardLog(payloadVO);
 
-        return ResponseEntity.ok("Payload received successfully!");
-    } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing payload");
+            return ResponseEntity.ok("Payload received successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing payload");
+        }
     }
-}
-    
+
+    // 복용 기록 수정
+    @PutMapping("/mybasicboardlog/edit")
+    public ResponseEntity<String> updateDose(@RequestBody PayloadVO payloadVO) {
+        try {
+            userdoseService.updateDose(payloadVO);
+            return ResponseEntity.ok("Data updated successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error updating data: " + e.getMessage());
+        }
+    }
     
 }
