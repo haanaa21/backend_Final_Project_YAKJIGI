@@ -117,7 +117,9 @@ public class UserdoseController {
     // 캘린더(디비 리스트)
     @GetMapping("/mybasicboardlog")
     public List<UserdoseVO> getUserDoses(@RequestParam String userId) {
-        return userdoseService.getUserDoses(userId);
+        List<UserdoseVO> doses = userdoseService.getUserDoses(userId);
+        System.out.println("반환값: " + doses);
+        return doses;
     }
 
     // 디비 삭제
@@ -134,17 +136,15 @@ public class UserdoseController {
 
     // 상세 보기
     @GetMapping("/mybasicboardlog/details")
-    public List<UserdoseVO> getDetailsByDate(@RequestParam String date, @RequestParam String userId) {
-        try {
-            return userdoseService.getDetailsByDateAndUser(date, userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null; // 에러 처리 필요
-        }
+    public List<UserdoseVO> getDetailsByDateAndUser(
+        @RequestParam String date,
+        @RequestParam String userId
+    ) {
+        return userdoseService.getDetailsByDateAndUser(date, userId);
     }
 
 
-    // 데이터 수신 및 로깅
+    // 저장하기
     @PostMapping("/receivepayload")
     public ResponseEntity<String> receivePayload(@RequestBody PayloadVO payloadVO) {
         try {

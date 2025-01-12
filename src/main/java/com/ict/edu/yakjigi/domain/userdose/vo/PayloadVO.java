@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class PayloadVO {
     private int user_idx;
+    private int post_num; // post_num 필드 추가
     private LocalDate dose_date;
     private String dose_other;
     private List<Medication> medications;
